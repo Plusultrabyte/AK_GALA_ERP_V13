@@ -26,7 +26,7 @@ jobs:
     - name: Run PyInstaller
       run: |
         cd AK_GALA_ERP_V13
-        pyinstaller --onefile --name "AK_GALA_ERP" --icon "my_icon.ico" --add-data "analytics_data.json;." --add-data "data/store_database.db;data" main.py
+        pyinstaller --onefile --name "AK_GALA_ERP" --icon "project.ico" --add-data "analytics_data.json;." --add-data "data/store_database.db;data" main.py
 
         
     - name: Upload Finished EXE
