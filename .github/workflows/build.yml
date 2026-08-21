@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pyinstaller PyQt6 PyQt6-Charts customtkinter
+        pip install pyinstaller PyQt6 PyQt6-Charts customtkinter twilio
 
     - name: Run PyInstaller
       run: |
