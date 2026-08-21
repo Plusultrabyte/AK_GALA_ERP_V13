@@ -21,12 +21,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pyinstaller
+        pip install pyinstaller PyQt6 PyQt6-Charts customtkinter
 
     - name: Run PyInstaller
       run: |
         cd AK_GALA_ERP_V13
-        pyinstaller --onefile --add-data "analytics_data.json;." --add-data "data/store_database.db;data" main.py
+        pyinstaller --onefile --name "AK_GALA_ERP" --icon "my_icon.ico" --add-data "analytics_data.json;." --add-data "data/store_database.db;data" main.py
+
         
     - name: Upload Finished EXE
       uses: actions/upload-artifact@v4
