@@ -52,8 +52,13 @@ except ImportError:
         return _mock_db
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # If main_window.py is inside the 'ui' folder, step up one level:
-if os.path.basename(BASE_DIR) == "ui":
-    BASE_DIR = os.path.dirname(BASE_DIR)
+if getattr(sys, 'frozen', False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # Если твой файл лежит в папке ui, поднимаемся на уровень выше к корню проекта:
+    if os.path.basename(BASE_DIR) == "ui":
+        BASE_DIR = os.path.dirname(BASE_DIR)
 
 ANALYTICS_FILE = os.path.join(BASE_DIR, "analytics_data.json")
 # 🌐 MULTILINGUAL DICTIONARY (Russian & Turkmen)
