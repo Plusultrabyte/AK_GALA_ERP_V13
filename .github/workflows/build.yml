@@ -25,7 +25,7 @@ jobs:
 
     - name: Run PyInstaller
       run: |
-        pyinstaller --onefile pyinstaller --onefile --windowed --name "AK_GALA" --icon=project.ico main.py
+        pyinstaller --onefile --windowed --name "AK_GALA" --icon=project.ico main.py
 
     - name: Upload Finished EXE
       uses: actions/upload-artifact@v4
