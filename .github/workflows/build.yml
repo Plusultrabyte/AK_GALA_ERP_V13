@@ -25,6 +25,7 @@ jobs:
 
     - name: Run PyInstaller
       run: |
+        cd AK_GALA_ERP_V13
         pyinstaller --onefile --windowed --name "AK_GALA" --icon=project.ico main.py
 
     - name: Upload Finished EXE
