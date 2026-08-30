@@ -3,7 +3,15 @@ import sqlite3
 import os
 
 # 1. Железобетонный путь: работает из любой папки
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if getattr(sys, 'frozen', False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # Если твой файл лежит в папке ui, поднимаемся на уровень выше к корню проекта:
+    if os.path.basename(BASE_DIR) == "ui":
+        BASE_DIR = os.path.dirname(BASE_DIR)
+
+
 DB_PATH = os.path.join(BASE_DIR, "data", "store_database.db")
 
 
