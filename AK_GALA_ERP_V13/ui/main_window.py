@@ -50,7 +50,7 @@ except ImportError:
 
     def get_all_products():
         return _mock_db
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # If main_window.py is inside the 'ui' folder, step up one level:
 if getattr(sys, 'frozen', False):
     BASE_DIR = os.path.dirname(sys.executable)
