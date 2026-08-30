@@ -32,6 +32,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Windows-Executable
-        path: dist/*.exe
+        path: AK_GALA_ERP_V13/dist/*.exe
 
 
