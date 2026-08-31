@@ -1,8 +1,7 @@
 
 import os
 import sys
-
-
+from core.database import DB_PATH
 from PyQt6.QtCore import QMargins
 
 
@@ -50,8 +49,7 @@ except ImportError:
 
     def get_all_products():
         return _mock_db
-
-# If main_window.py is inside the 'ui' folder, step up one level:
+# Определяем базовую папку в зависимости от того, запущен ли .exe или скрипт
 if getattr(sys, 'frozen', False):
     BASE_DIR = os.path.dirname(sys.executable)
 else:
@@ -61,6 +59,7 @@ else:
         BASE_DIR = os.path.dirname(BASE_DIR)
 
 ANALYTICS_FILE = os.path.join(BASE_DIR, "analytics_data.json")
+
 # 🌐 MULTILINGUAL DICTIONARY (Russian & Turkmen)
 LANGUAGES = {
     "ru": {
@@ -987,7 +986,7 @@ class AnalyticsWidget(QWidget):
             s.setLabelVisible(False)
 
     def pay_debt_in_json(self, target_name, pay_amount):
-        file_path = "analytics_data.json"
+        file_path = ANALYTICS_FILE
         try:
             with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -1027,7 +1026,7 @@ class AnalyticsWidget(QWidget):
         import json
         import os
 
-        file_path = "analytics_data.json"
+        file_path = ANALYTICS_FILE
         if not os.path.exists(file_path):
             return
 
@@ -2680,8 +2679,8 @@ class SalesWidget(QWidget):
 
         for root, dirs, files in os.walk(project_root):
             dirs[:] = [d for d in dirs if d not in ignored_dirs]
-            if "store_database.db" in files:
-                test_path = os.path.join(root, "store_database.db")
+            if DB_PATH in files:
+                test_path = os.path.join(root, DB_PATH)
                 try:
                     conn = sqlite3.connect(test_path)
                     cursor = conn.cursor()
@@ -4082,13 +4081,13 @@ class MainWindow(QMainWindow):
         if reply == QMessageBox.StandardButton.Yes:
             try:
                 # Set up the paths based on your project structure
-                BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                
 
                 # Database is inside the 'data' folder
-                db_path = os.path.join(BASE_DIR, "data", "store_database.db")
+                db_path = os.path.join(BASE_DIR, DB_PATH)
 
                 # FIX: JSON is in the root BASE_DIR directory, NOT inside 'ui'
-                json_path = os.path.join(BASE_DIR, "analytics_data.json")
+                json_path = os.path.join(BASE_DIR, ANALYTICS_FILE)
 
                 # 2. Wipe the Analytics JSON
                 if os.path.exists(json_path):
