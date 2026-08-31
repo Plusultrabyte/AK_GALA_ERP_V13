@@ -1,23 +1,20 @@
-import sys
+
 import sqlite3
 import os
-
+import sys
 # 1. Железобетонный путь: работает из любой папки
 if getattr(sys, 'frozen', False):
     BASE_DIR = os.path.dirname(sys.executable)
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     # Если твой файл лежит в папке ui, поднимаемся на уровень выше к корню проекта:
-    if os.path.basename(BASE_DIR) == "ui":
-        BASE_DIR = os.path.dirname(BASE_DIR)
-
 
 DB_PATH = os.path.join(BASE_DIR, "data", "store_database.db")
 
 
 def get_available_products():
     """Получает все товары из базы данных, которые есть на складе"""
-    conn = sqlite3.connect("database.db")  # Убедись, что путь к твоей БД правильный
+    conn = sqlite3.connect(DB_PATH)  # Убедись, что путь к твоей БД правильный
     cursor = conn.cursor()
 
     try:
@@ -53,7 +50,7 @@ def sell(product_id, qty_sold):
     import sqlite3
 
     db_path = "warehouse.db"  # Убедись, что имя файла базы верное
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     try:
@@ -78,7 +75,7 @@ def sell(product_id, qty_sold):
 
 def update_product_stock_in_db(product_id, quantity_change):
     """Изменяет количество товара на складе (stock) в БД"""
-    conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     try:
@@ -358,7 +355,7 @@ def clear_database():
     conn.commit()
     conn.close()
 def get_daily_sales():
-    conn = sqlite3.connect("store_database.db")
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""SELECT SUM(total_amount) FROM orders
     WHERE status = 'completed' AND strftime('%Y-%m-%d', date) = datetime('now', 'localtime')""")
@@ -366,7 +363,7 @@ def get_daily_sales():
     conn.close()
     return result if result else 0.0
 def get_monthly_sales():
-    conn = sqlite3.connect("store_database.db")
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""SELECT SUM(total_amount) FROM orders
     WHERE status = 'completed' AND strftime('%Y-%m-%d', date) = strftime('%Y-%m', 'now', 'localtime')""")
@@ -515,3 +512,11 @@ def get_recent_transactions(self, limit=15):
 
 # Auto-initialize DB tables on file import
 init_db()
+
+
+
+
+
+
+
+
