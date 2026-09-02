@@ -512,11 +512,3 @@ def get_recent_transactions(self, limit=15):
 
 # Auto-initialize DB tables on file import
 init_db()
-
-
-
-
-
-
-
-
