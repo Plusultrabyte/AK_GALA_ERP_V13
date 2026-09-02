@@ -2677,21 +2677,8 @@ class SalesWidget(QWidget):
         target_column = None
         ignored_dirs = {'.venv', 'venv', '.git', '__pycache__', 'build', 'dist'}
 
-        for root, dirs, files in os.walk(project_root):
-            dirs[:] = [d for d in dirs if d not in ignored_dirs]
-            if DB_PATH in files:
-                test_path = os.path.join(root, DB_PATH)
-                try:
-                    conn = sqlite3.connect(test_path)
-                    cursor = conn.cursor()
-                    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-                    tables = [t[0] for t in cursor.fetchall() if t[0] != 'sqlite_sequence']
-                    conn.close()
-                    if tables:
-                        real_db_path = test_path
-                        break
-                except Exception:
-                    continue
+        if os.path.exists(DB_PATH):
+            real_db_path = DB_PATH
 
         if not real_db_path:
             QMessageBox.critical(self, "Baza tapylmady!", "⚠️ 'store_database.db' tapylmady.")
@@ -2699,7 +2686,7 @@ class SalesWidget(QWidget):
 
         # Динамический поиск таблицы и колонки остатков
         try:
-            conn = sqlite3.connect(real_db_path)
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
             tables = [t[0] for t in cursor.fetchall() if t[0] != 'sqlite_sequence']
@@ -2721,7 +2708,7 @@ class SalesWidget(QWidget):
 
         # Проведение транзакции списания в БД
         try:
-            conn = sqlite3.connect(real_db_path)
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             column_to_update = target_column if target_column else "galyndy"
 
