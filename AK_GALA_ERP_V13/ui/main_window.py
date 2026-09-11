@@ -1688,7 +1688,7 @@ class CompareDatesDialog(QDialog):
         title_text = "Сравнение дат" if self.lang == "ru" else "Sene Deňeşdirme"
         self.setWindowTitle(title_text)
 
-        self.setFixedSize(550, 350)
+        self.setMinimumSize(550, 350)
 
         self.setStyleSheet("""
             QDialog { background-color: #1E1E28; }
@@ -2275,7 +2275,7 @@ from PyQt6.QtGui import QPainter, QColor
 class AnimatedToggle(QCheckBox):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setFixedSize(52, 28)
+        self.setMinimumSize(52, 28)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
         self._bg_off = QColor("#1f242d")
         self._bg_on = QColor("#00ff66")  # Neo Green
@@ -3091,7 +3091,7 @@ class NavButton(QPushButton):
 class MetricCard(QFrame):
     def __init__(self, icon_str, title_str, value_str, color_hex, parent):
         super().__init__(parent)
-        self.setFixedSize(220, 65)
+        self.setMinimumSize(220, 65)
         self.setObjectName("MetricCard")
 
         layout = QHBoxLayout(self)
@@ -3123,7 +3123,7 @@ class MetricCard(QFrame):
 class DashboardCard(QPushButton):
     def __init__(self, icon_str, title, subtitle, parent):
         super().__init__(parent)
-        self.setFixedSize(245, 185)
+        self.setMinimumSize(245, 185)
         self.setObjectName("DashboardCard")
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
@@ -3171,7 +3171,7 @@ class AddProductDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Новый товар / Täze Haryt")
-        self.setFixedSize(400, 580)
+        self.setMinimumSize(400, 580)
         self.init_ui()
         self.apply_styles()
 
