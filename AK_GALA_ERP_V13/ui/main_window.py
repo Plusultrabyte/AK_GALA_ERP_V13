@@ -862,7 +862,7 @@ class AnalyticsWidget(QWidget):
                 dialog = QDialog(self)
                 # Apply the translation to the window title
                 dialog.setWindowTitle(title_text)
-                dialog.setFixedSize(320, 250)
+                dialog.setMinimumSize(320, 250)
                 dialog.setStyleSheet("background-color: #1e1e1e; border-radius: 10px;")
 
                 layout = QVBoxLayout(dialog)
@@ -874,7 +874,7 @@ class AnalyticsWidget(QWidget):
                 lbl_name.setStyleSheet("color: white; font-weight: bold; font-size: 15px;")
 
                 btn_close = QPushButton("x", dialog)
-                btn_close.setFixedSize(30, 30)
+                btn_close.setMinimumSize(30, 30)
                 btn_close.setCursor(Qt.CursorShape.PointingHandCursor)
                 btn_close.setStyleSheet(
                         "background-color: #444; color: white; font-size: 18px; border-radius: 15px;")
@@ -2538,7 +2538,7 @@ class SalesWidget(QWidget):
                     continue
                 card = QFrame()
                 card.setObjectName("ProductCard")
-                card.setFixedSize(190, 135)
+                card.setMinimumSize(190, 135)
                 card.setCursor(Qt.CursorShape.PointingHandCursor)
                 card.setStyleSheet("""
                     QFrame#ProductCard { 
@@ -3133,7 +3133,7 @@ class DashboardCard(QPushButton):
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.circle_frame = QFrame(self)
-        self.circle_frame.setFixedSize(60, 60)
+        self.circle_frame.setMinimumSize(60, 60)
         self.circle_frame.setStyleSheet("""
             QFrame {
                 border: 2px solid rgba(0, 204, 102, 0.4);
@@ -3434,7 +3434,7 @@ class MainWindow(QMainWindow):
             "color: #FFFFFF; font-weight: 900; font-size: 20px; letter-spacing: 0.5px; background: transparent;")
 
         self.lbl_version = QLabel("V15 PRO", brand_container)
-        self.lbl_version.setFixedSize(65, 20)
+        self.lbl_version.setMinimumSize(65, 20)
         self.lbl_version.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lbl_version.setStyleSheet("""
             background-color: rgba(0, 204, 102, 0.15);
@@ -3510,7 +3510,7 @@ class MainWindow(QMainWindow):
 
         self.user_panel = QFrame(right_container)
         self.user_panel.setObjectName("UserPanel")
-        self.user_panel.setFixedSize(190, 65)
+        self.user_panel.setMinimumSize(190, 65)
         user_layout = QHBoxLayout(self.user_panel)
         user_layout.setContentsMargins(10, 8, 10, 8)
 
@@ -3606,7 +3606,7 @@ class MainWindow(QMainWindow):
         self.btn_backup_action = QPushButton(self.backup_panel)
         self.btn_backup_action.setObjectName("BackupBtn")
         self.btn_backup_action.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.btn_backup_action.setFixedSize(140, 36)
+        self.btn_backup_action.setMinimumSize(140, 36)
 
         backup_layout.addWidget(shield_icon)
         backup_layout.addLayout(text_col, 1)
